@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: kiran-app      
+spec:
+  selector:                  
+    deploymentconfig: kiran-app
+  ports:
+  - nodePort: 0
+    port: 5000               
+    protocol: TCP
+    targetPort: 5000

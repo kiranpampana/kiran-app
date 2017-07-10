@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: DeploymentConfig
+metadata:
+  name: mysql
+spec:
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+      - image: mysql
+        name: mysql
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: password
+        ports:
+        - containerPort: 3306
+          name: mysql
+        volumeMounts:
+        - name: mysql-empty-storage
+          mountPath: /var/lib/mysql
+      volumes:
+      - name: mysql-empty-storage
+        emptyDir: {}
+  replicas: 1
